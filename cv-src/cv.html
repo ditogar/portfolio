@@ -47,11 +47,14 @@
   h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
   section + section { margin-top: 3.6mm; }
   aside section + section { margin-top: 3.4mm; }
+  main section + section { margin-top: 6.4mm; }
+  main .bullets li { margin-top: 1.2mm; }
+  main { line-height: 1.5; }
 
   .summary { font-size: 9.1pt; color: var(--ink); line-height: 1.48; }
   .summary strong { font-weight: 600; }
 
-  .job + .job { margin-top: 2.8mm; }
+  .job + .job { margin-top: 4mm; }
   .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
   .job-title { font-size: 10pt; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
   .job-title span { color: var(--blue); font-weight: 600; }
@@ -143,12 +146,7 @@
 
       <section>
         <h2>Proyectos personales · Videojuegos con IA</h2>
-        <p class="lab-intro">Coordino varios agentes de IA en paralelo (Claude, Codex, OpenCode; modelos GPT, Claude, Gemini, Kimi, DeepSeek y Grok): <code>AGENTS.md</code> y skills por repositorio, paquetes de trabajo en ramas aisladas (<code>git worktree</code>) y verificación con tests, bots de QA y simuladores de balance. Objetivo: Steam.</p>
-        <ul class="bullets">
-          <li><strong>Deep Quota</strong> (Godot 4.7 · GDScript · Blender): roguelite completo y jugable, con tableros resolubles verificados, audio 100&nbsp;% sintetizado y escenarios modelados por script.</li>
-          <li><strong>One More Horde</strong> (Unity 6 · C# · .NET): tower defense roguelike con simulación determinista separada del motor; pruebas con 20.000 enemigos en pantalla.</li>
-          <li><strong>Skybreaker</strong> (Unity 6, v0.2 jugable), <strong>Black Evac</strong> (Godot + C#, preproducción) y <strong>Dados del Pozo</strong> (Godot, incremental de dados con física 3D).</li>
-        </ul>
+        <p class="lab-intro">Coordino varios agentes de IA en paralelo (Claude, Codex, OpenCode; modelos GPT, Claude, Gemini, Kimi, DeepSeek y Grok): <code>AGENTS.md</code> y skills por repositorio, paquetes de trabajo en ramas aisladas (<code>git worktree</code>) y verificación con tests, bots de QA y simuladores de balance.</p>
       </section>
 
       <section>
