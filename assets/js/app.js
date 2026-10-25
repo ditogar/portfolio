@@ -148,6 +148,14 @@
   /* Sección "Ahora": pasos ligados al scroll */
   const nowSec = $('#ahora'), steps = $$('.now-step'), dots = $$('.now-dots i'), system = $('#system');
   let nowStep = -1;
+  // Los pasos están superpuestos: el contenedor toma la altura del más largo.
+  const nowStepsBox = $('.now-steps');
+  function fitNowSteps() {
+    if (nowStepsBox) nowStepsBox.style.minHeight = Math.max(...steps.map(s => s.offsetHeight)) + 'px';
+  }
+  addEventListener('resize', fitNowSteps, { passive: true });
+  document.addEventListener('langchange', fitNowSteps);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNowSteps);
   function updateNow() {
     if (!nowSec) return;
     const r = nowSec.getBoundingClientRect();
