@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Diego Torres García — Software, agentes de IA y videojuegos</title>
+<meta name="description" content="Portfolio de Diego Torres García, Junior Engineer en NTT DATA. Lidero técnicamente una iniciativa de agentes de IA, desarrollo con Python y automatización, y construyo videojuegos con equipos de agentes.">
+<meta name="author" content="Diego Torres García">
+<meta name="theme-color" content="#04050c">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="ca_ES">
+<meta property="og:title" content="Diego Torres García — Software, agentes de IA y videojuegos">
+<meta property="og:description" content="Junior Engineer en NTT DATA. Agentes de IA, Python, automatización y un laboratorio de videojuegos construidos con agentes.">
+<meta property="og:image" content="assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..800;1,300..600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/main.css">
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Diego Torres García","jobTitle":"Junior Engineer","worksFor":{"@type":"Organization","name":"NTT DATA"},"address":{"@type":"PostalAddress","addressRegion":"Barcelona","addressCountry":"ES"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"Universitat Oberta de Catalunya"},{"@type":"EducationalOrganization","name":"Institut Poblenou"}],"knowsLanguage":["es","ca","en","fr"],"knowsAbout":["Python","AI agents","Process automation","Godot","Unity","C#"],"sameAs":["https://www.linkedin.com/in/diego-torres-ditogar021/"]}</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module" src="assets/js/space.js"></script>
+<script defer src="assets/js/i18n.js"></script>
+<script defer src="assets/js/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenido" data-i18n="ui.skip">Saltar al contenido</a>
+
+<div class="sky" aria-hidden="true"><canvas id="space"></canvas><div class="sky-fallback"></div><div class="sky-vignette"></div><div class="sky-grain"></div></div>
+
+<div class="hud mono" aria-hidden="true">
+  <span class="hud-chapter" id="hud-chapter">00 · INICIO</span>
+  <span class="hud-track"><i id="hud-bar"></i></span>
+  <span class="hud-num" id="hud-num">000</span>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="#inicio" class="brand" aria-label="Diego Torres García" data-i18n-attr="aria-label:ui.home">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-opacity=".35"/><ellipse cx="16" cy="16" rx="15" ry="5.5" fill="none" stroke="url(#bm)" stroke-width="1.4" transform="rotate(-24 16 16)"/><circle cx="16" cy="16" r="4.2" fill="url(#bm)"/><defs><linearGradient id="bm" x1="0" x2="1"><stop offset="0" stop-color="#7aa2ff"/><stop offset=".6" stop-color="#b48cff"/><stop offset="1" stop-color="#6ff0ff"/></linearGradient></defs></svg></span>
+      <span class="brand-name">Diego Torres</span>
+    </a>
+    <nav class="site-nav" aria-label="Principal" data-i18n-attr="aria-label:ui.navLabel">
+      <a href="#ahora" data-i18n="nav.now">Ahora</a>
+      <a href="#laboratorio" data-i18n="nav.lab">Laboratorio</a>
+      <a href="#metodo" data-i18n="nav.method">Método</a>
+      <a href="#recorrido" data-i18n="nav.path">Recorrido</a>
+      <a href="#stack" data-i18n="nav.stack">Stack</a>
+      <a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang" role="group" aria-label="Idioma" data-i18n-attr="aria-label:ui.langLabel">
+        <button type="button" data-lang="es" aria-pressed="true" lang="es" title="Español">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en" title="English">EN</button>
+        <button type="button" data-lang="ca" aria-pressed="false" lang="ca" title="Català">CA</button>
+      </div>
+      <button type="button" class="icon-btn kbd-btn" id="palette-open" aria-haspopup="dialog" aria-label="Abrir navegación rápida" data-i18n-attr="aria-label:ui.paletteOpen;title:ui.paletteOpen" title="Abrir navegación rápida"><span class="mono">⌘K</span></button>
+      <button type="button" class="icon-btn" id="motion-toggle" aria-pressed="false" aria-label="Pausar animaciones" title="Pausar animaciones" data-i18n-attr="aria-label:ui.motionOff;title:ui.motionOff"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path class="i-pause" d="M10 8.5v7M14 8.5v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="i-play" d="M10 8.3l5.6 3.7L10 15.7z" fill="currentColor"/></svg></button>
+      <a class="pill-btn header-cta" href="#contacto" data-i18n="nav.contact">Contacto</a>
+      <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú" data-i18n-attr="aria-label:ui.menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Menú móvil" data-i18n-attr="aria-label:ui.mobileNav" hidden>
+  <a href="#ahora"><span class="mono">01</span><span data-i18n="nav.now">Ahora</span></a>
+  <a href="#laboratorio"><span class="mono">02</span><span data-i18n="nav.lab">Laboratorio</span></a>
+  <a href="#metodo"><span class="mono">03</span><span data-i18n="nav.method">Método</span></a>
+  <a href="#recorrido"><span class="mono">04</span><span data-i18n="nav.path">Recorrido</span></a>
+  <a href="#stack"><span class="mono">05</span><span data-i18n="nav.stack">Stack</span></a>
+  <a href="#sobre-mi"><span class="mono">06</span><span data-i18n="nav.about">Sobre mí</span></a>
+  <a href="#contacto"><span class="mono">07</span><span data-i18n="nav.contact">Contacto</span></a>
+</nav>
+
+<main id="contenido">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio" data-chapter="00" data-chapter-key="ch.home">
+  <div class="shell hero-grid">
+    <div class="hero-copy">
+      <p class="hero-hello" data-speed="0.18">
+        <img src="assets/img/diego.webp" width="48" height="48" alt="" class="hero-avatar">
+        <span><span data-i18n="hero.hello">Hola, soy</span> <strong>Diego Torres García</strong></span>
+      </p>
+      <h1 class="hero-title" data-speed="0.14">
+        <span class="line"><span data-i18n="hero.t1">Construyo software</span></span>
+        <span class="line"><span data-i18n="hero.t2">con <em>agentes de IA.</em></span></span>
+      </h1>
+      <p class="hero-lead" data-speed="0.1" data-i18n="hero.lead">En <strong>NTT DATA</strong> lidero técnicamente una iniciativa basada en agentes de IA y desarrollo con Python y automatización. Fuera del trabajo, dirijo equipos de agentes para crear mis propios videojuegos.</p>
+      <div class="hero-actions" data-speed="0.07">
+        <a class="btn btn-primary" href="#ahora"><span data-i18n="hero.cta1">Ver mi trabajo</span><span aria-hidden="true">↓</span></a>
+        <a class="btn" href="#laboratorio"><span data-i18n="hero.cta2">Entrar al laboratorio</span><span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="assets/cv/CV_Diego_Torres_Garcia_2026.pdf" download><span data-i18n="hero.cv">Descargar CV</span><span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <aside class="hero-status" data-speed="-0.12" aria-label="Estado actual" data-i18n-attr="aria-label:hero.statusLabel">
+      <div class="status-head mono"><i class="pulse"></i><span data-i18n="hero.statusTitle">Estado actual</span></div>
+      <dl class="status-list">
+        <div><dt class="mono" data-i18n="hero.s1k">Rol</dt><dd>Junior Engineer · NTT DATA</dd></div>
+        <div><dt class="mono" data-i18n="hero.s2k">Foco</dt><dd data-i18n="hero.s2v">Agentes de IA · Python · Automatización</dd></div>
+        <div><dt class="mono" data-i18n="hero.s3k">Estudiando</dt><dd data-i18n="hero.s3v">Ingeniería Informática · UOC</dd></div>
+        <div><dt class="mono" data-i18n="hero.s4k">Base</dt><dd data-i18n="hero.s4v">Área de Barcelona · híbrido</dd></div>
+      </dl>
+    </aside>
+  </div>
+  <div class="shell">
+    <ul class="hero-stats" role="list">
+      <li><b>2024</b><span data-i18n="hero.k1">Entro en NTT DATA en prácticas</span></li>
+      <li><b>MH</b><span data-i18n="hero.k2">Matrícula de Honor en DAM</span></li>
+      <li><b>5</b><span data-i18n="hero.k3">juegos en el laboratorio</span></li>
+      <li><b>4</b><span data-i18n="hero.k4">idiomas</span></li>
+    </ul>
+  </div>
+  <div class="hero-foot shell mono">
+    <span class="scroll-cue"><i></i><span data-i18n="hero.scroll">Desplázate para despegar</span></span>
+    <span class="palette-hint"><span data-i18n="hero.hint1">Pulsa</span> <kbd>Ctrl</kbd> <kbd>K</kbd> <span data-i18n="hero.hint2">para navegar</span></span>
+  </div>
+</section>
+
+<!-- ============ AHORA ============ -->
+<section class="now" id="ahora" data-chapter="01" data-chapter-key="ch.now" aria-labelledby="now-title">
+  <div class="now-sticky">
+    <div class="shell now-grid">
+      <div class="now-copy">
+        <p class="eyebrow mono"><span>01</span><span data-i18n="now.eyebrow">Ahora · NTT DATA</span></p>
+        <h2 class="section-title" id="now-title" data-i18n="now.title">Del código a <em>las decisiones.</em></h2>
+        <div class="now-steps">
+          <article class="now-step is-current" data-step="0">
+            <span class="mono step-tag" data-i18n="now.s1tag">01 · Diseño</span>
+            <h3 data-i18n="now.s1h">Decido cómo se construye.</h3>
+            <p data-i18n="now.s1p">Lidero técnicamente una nueva iniciativa basada en <strong>agentes de IA</strong>: diseño la solución, tomo las decisiones técnicas y participo en su desarrollo.</p>
+          </article>
+          <article class="now-step" data-step="1">
+            <span class="mono step-tag" data-i18n="now.s2tag">02 · Desarrollo</span>
+            <h3 data-i18n="now.s2h">Y lo llevo a código.</h3>
+            <p data-i18n="now.s2p">Desarrollo soluciones y automatizaciones con <strong>Python</strong> y Power Automate, con un foco creciente en IA aplicada. En el día a día: Jira, Postman, SonarQube, Codex y ChatGPT.</p>
+          </article>
+          <article class="now-step" data-step="2">
+            <span class="mono step-tag" data-i18n="now.s3tag">03 · Equipo</span>
+            <h3 data-i18n="now.s3h">Y ayudo a crecer a otros.</h3>
+            <p data-i18n="now.s3p">Coordino a desarrolladores en prácticas: planifico y reparto tareas, sigo avances y tiempos y resuelvo dudas. He apoyado a <strong>cuatro o cinco</strong> y he sido el responsable directo de <strong>dos</strong>, incluido su TFG.</p>
+          </article>
+        </div>
+        <div class="now-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+      </div>
+      <div class="now-visual" aria-hidden="true">
+        <svg class="system" id="system" viewBox="0 0 520 520" data-step="0">
+          <defs>
+            <radialGradient id="sysCore" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#b9c8ff"/><stop offset=".45" stop-color="#7a8cff"/><stop offset="1" stop-color="#7a8cff" stop-opacity="0"/></radialGradient>
+            <linearGradient id="sysLine" x1="0" x2="1"><stop offset="0" stop-color="#7aa2ff"/><stop offset="1" stop-color="#b48cff"/></linearGradient>
+          </defs>
+          <circle class="ring r1" cx="260" cy="260" r="200"/>
+          <circle class="ring r2" cx="260" cy="260" r="140"/>
+          <circle class="ring r3" cx="260" cy="260" r="236"/>
+          <g class="links">
+            <line class="l l0" x1="260" y1="260" x2="260" y2="60"/>
+            <line class="l l1" x1="260" y1="260" x2="433" y2="360"/>
+            <line class="l l2" x1="260" y1="260" x2="87" y2="360"/>
+          </g>
+          <circle class="core-glow" cx="260" cy="260" r="92" fill="url(#sysCore)"/>
+          <circle class="core" cx="260" cy="260" r="46"/>
+          <text class="core-t" x="260" y="256" text-anchor="middle">AI</text>
+          <text class="core-s" x="260" y="276" text-anchor="middle">AGENTS</text>
+          <g class="node n0" transform="translate(260 60)"><circle r="30"/><text y="5" text-anchor="middle">◇</text></g>
+          <g class="node n1" transform="translate(433 360)"><circle r="30"/><text y="6" text-anchor="middle">{ }</text></g>
+          <g class="node n2" transform="translate(87 360)"><circle r="30"/><text y="6" text-anchor="middle">◎</text></g>
+          <g class="orbiters"><circle class="o o1" cx="260" cy="120" r="3.5"/><circle class="o o2" cx="400" cy="260" r="2.5"/><circle class="o o3" cx="140" cy="330" r="3"/></g>
+        </svg>
+        <ol class="arc mono">
+          <li><span data-i18n="now.a1d">Jun 2024</span><b data-i18n="now.a1">Entro en prácticas</b></li>
+          <li><span data-i18n="now.a2d">Jun 2025</span><b data-i18n="now.a2">Junior Engineer</b></li>
+          <li class="on"><span data-i18n="now.a3d">Hoy</span><b data-i18n="now.a3">Liderazgo técnico</b></li>
+        </ol>
+      </div>
+    </div>
+    <p class="shell now-note mono" data-i18n="now.note">Por confidencialidad no detallo clientes, datos ni arquitectura interna.</p>
+  </div>
+</section>
+
+<!-- ============ LABORATORIO ============ -->
+<section class="section lab" id="laboratorio" data-chapter="02" data-chapter-key="ch.lab" aria-labelledby="lab-title">
+  <div class="shell">
+    <header class="section-head reveal">
+      <span class="ghost" aria-hidden="true" data-i18n="nav.lab">Laboratorio</span>
+      <p class="eyebrow mono"><span>02</span><span data-i18n="lab.eyebrow">Laboratorio</span></p>
+      <h2 class="section-title" data-speed="0.08" id="lab-title" data-i18n="lab.title">Videojuegos: mi banco de pruebas <em>con agentes de IA.</em></h2>
+      <p class="section-lead" data-i18n="lab.lead">Un videojuego lo exige todo a la vez: gráficos, física, economía, audio, rendimiento y diseño. Por eso es donde llevo al límite mi forma de trabajar con IA. Son proyectos personales en desarrollo, todavía sin publicar; el objetivo es llegar a Steam.</p>
+    </header>
+
+    <div class="games">
+
+      <article class="game reveal" id="deep-quota" style="--g1:#d9e85c;--g2:#ff9a3d">
+        <div class="game-media" data-speed="0.04">
+          <button type="button" class="game-cover" data-gallery="deep-quota" data-index="0" aria-label="Ampliar capturas de Deep Quota" data-i18n-attr="aria-label:lab.zoomDQ">
+            <img src="assets/img/games/deep-quota-1-sm.webp" data-full="assets/img/games/deep-quota-1.webp" width="760" height="474" loading="lazy" decoding="async" alt="Deep Quota: el tablero en el monitor CRT de la cabina" data-i18n-attr="alt:alt.dq1">
+            <span class="zoom mono" aria-hidden="true">⤢</span>
+          </button>
+          <div class="thumbs">
+            <button type="button" data-gallery="deep-quota" data-index="0" class="on"><img src="assets/img/games/deep-quota-1-sm.webp" data-full="assets/img/games/deep-quota-1.webp" loading="lazy" decoding="async" alt="Deep Quota: el tablero en el monitor CRT de la cabina" data-i18n-attr="alt:alt.dq1"></button>
+            <button type="button" data-gallery="deep-quota" data-index="1"><img src="assets/img/games/deep-quota-2-sm.webp" data-full="assets/img/games/deep-quota-2.webp" loading="lazy" decoding="async" alt="Deep Quota: pantalla de título" data-i18n-attr="alt:alt.dq2"></button>
+            <button type="button" data-gallery="deep-quota" data-index="2"><img src="assets/img/games/deep-quota-3-sm.webp" data-full="assets/img/games/deep-quota-3.webp" loading="lazy" decoding="async" alt="Deep Quota: sector 8 con la cabina en alerta" data-i18n-attr="alt:alt.dq3"></button>
+            <button type="button" data-gallery="deep-quota" data-index="3"><img src="assets/img/games/deep-quota-4-sm.webp" data-full="assets/img/games/deep-quota-4.webp" loading="lazy" decoding="async" alt="Deep Quota: la máquina expendedora de equipo" data-i18n-attr="alt:alt.dq4"></button>
+          </div>
+        </div>
+        <div class="game-info" data-speed="-0.05">
+          <div class="game-top mono"><span class="game-n">01 / 05</span><span class="status s-done" data-i18n="lab.dq.status">Completo y jugable</span></div>
+          <h3 class="game-name">Deep Quota</h3>
+          <p class="game-genre" data-i18n="lab.dq.genre">Roguelite de excavación corporativa</p>
+          <p class="game-pitch" data-i18n="lab.dq.pitch">Un buscaminas con economía al estilo Balatro, jugado desde la cabina de un operario: en el monitor CRT resuelves el tablero y, al otro lado de la cristalera, la perforadora destruye de verdad cada bloque de roca.</p>
+          <ul class="game-points">
+            <li data-i18n="lab.dq.p1">100 equipos, 6 jefes con fases, 80 logros y tres finales.</li>
+            <li data-i18n="lab.dq.p2">Tableros «sin adivinanzas»: se generan resolubles y se verifican antes de empezar.</li>
+            <li data-i18n="lab.dq.p3">Audio 100&nbsp;% sintetizado: 105 efectos y música adaptativa por capítulo.</li>
+            <li data-i18n="lab.dq.p4">Escenarios modelados con scripts de Blender reproducibles, bot que juega los desafíos y simulador de balance.</li>
+          </ul>
+          <ul class="tags mono" role="list"><li>Godot 4.7</li><li>GDScript</li><li>Blender</li><li>Shaders</li></ul>
+        </div>
+      </article>
+
+      <article class="game reveal" id="dados-del-pozo" style="--g1:#2fd1b0;--g2:#e0b25a">
+        <div class="game-media" data-speed="0.04">
+          <button type="button" class="game-cover" data-gallery="dados-del-pozo" data-index="0" aria-label="Ampliar capturas de Dados del Pozo" data-i18n-attr="aria-label:lab.zoomDP">
+            <img src="assets/img/games/dados-del-pozo-1-sm.webp" data-full="assets/img/games/dados-del-pozo-1.webp" width="760" height="318" loading="lazy" decoding="async" alt="Dados del Pozo: la mesa de juego en la sala del casino" data-i18n-attr="alt:alt.dp1">
+            <span class="zoom mono" aria-hidden="true">⤢</span>
+          </button>
+          <div class="thumbs">
+            <button type="button" data-gallery="dados-del-pozo" data-index="0" class="on"><img src="assets/img/games/dados-del-pozo-1-sm.webp" data-full="assets/img/games/dados-del-pozo-1.webp" loading="lazy" decoding="async" alt="Dados del Pozo: la mesa de juego en la sala del casino" data-i18n-attr="alt:alt.dp1"></button>
+            <button type="button" data-gallery="dados-del-pozo" data-index="1"><img src="assets/img/games/dados-del-pozo-2-sm.webp" data-full="assets/img/games/dados-del-pozo-2.webp" loading="lazy" decoding="async" alt="Dados del Pozo: combate contra el Espantapájaros" data-i18n-attr="alt:alt.dp2"></button>
+            <button type="button" data-gallery="dados-del-pozo" data-index="2"><img src="assets/img/games/dados-del-pozo-3-sm.webp" data-full="assets/img/games/dados-del-pozo-3.webp" loading="lazy" decoding="async" alt="Dados del Pozo: el tablero en espiral al empezar la partida" data-i18n-attr="alt:alt.dp3"></button>
+            <button type="button" data-gallery="dados-del-pozo" data-index="3"><img src="assets/img/games/dados-del-pozo-4-sm.webp" data-full="assets/img/games/dados-del-pozo-4.webp" loading="lazy" decoding="async" alt="Dados del Pozo: explorando la sala de juego" data-i18n-attr="alt:alt.dp4"></button>
+          </div>
+        </div>
+        <div class="game-info" data-speed="-0.05">
+          <div class="game-top mono"><span class="game-n">02 / 05</span><span class="status s-play" data-i18n="lab.dp.status">Jugable · en desarrollo</span></div>
+          <h3 class="game-name">Dados del Pozo</h3>
+          <p class="game-genre" data-i18n="lab.dp.genre">Incremental de dados con física</p>
+          <p class="game-pitch" data-i18n="lab.dp.pitch">En la sala privada de un casino ocultista agitas el cubilete y lanzas dados con física real sobre un tablero en espiral que tu peón recorre hasta el guardián de cada zona.</p>
+          <ul class="game-points">
+            <li data-i18n="lab.dp.p1">Iconos, texturas, caras de los dados y audio generados por código.</li>
+            <li data-i18n="lab.dp.p2">Sala 3D con 38 objetos generados desde un script de Blender.</li>
+            <li data-i18n="lab.dp.p3">Simuladores de economía y de ritmo reproducibles por semilla.</li>
+            <li data-i18n="lab.dp.p4">Una historia ambiental que se descubre explorando la propia sala.</li>
+          </ul>
+          <ul class="tags mono" role="list"><li>Godot 4.7</li><li>GDScript</li><li data-i18n="lab.tagPhysics">Física 3D</li><li>Blender</li></ul>
+        </div>
+      </article>
+
+      <article class="game reveal" id="black-evac" style="--g1:#ff7a59;--g2:#7aa2ff">
+        <div class="game-media" data-speed="0.04">
+          <button type="button" class="game-cover" data-gallery="black-evac" data-index="0" aria-label="Ampliar capturas de Black Evac" data-i18n-attr="aria-label:lab.zoomBE">
+            <img src="assets/img/games/black-evac-1-sm.webp" data-full="assets/img/games/black-evac-1.webp" width="760" height="428" loading="lazy" decoding="async" alt="Black Evac: calle nocturna en 3D pixelado" data-i18n-attr="alt:alt.be1">
+            <span class="zoom mono" aria-hidden="true">⤢</span>
+          </button>
+          <div class="thumbs">
+            <button type="button" data-gallery="black-evac" data-index="0" class="on"><img src="assets/img/games/black-evac-1-sm.webp" data-full="assets/img/games/black-evac-1.webp" loading="lazy" decoding="async" alt="Black Evac: calle nocturna en 3D pixelado" data-i18n-attr="alt:alt.be1"></button>
+            <button type="button" data-gallery="black-evac" data-index="1"><img src="assets/img/games/black-evac-2-sm.webp" data-full="assets/img/games/black-evac-2.webp" loading="lazy" decoding="async" alt="Black Evac: incursión en una calle trasera" data-i18n-attr="alt:alt.be2"></button>
+            <button type="button" data-gallery="black-evac" data-index="2"><img src="assets/img/games/black-evac-3-sm.webp" data-full="assets/img/games/black-evac-3.webp" loading="lazy" decoding="async" alt="Black Evac: taller del refugio" data-i18n-attr="alt:alt.be3"></button>
+            <button type="button" data-gallery="black-evac" data-index="3"><img src="assets/img/games/black-evac-4-sm.webp" data-full="assets/img/games/black-evac-4.webp" loading="lazy" decoding="async" alt="Black Evac: campamento en el bosque de día" data-i18n-attr="alt:alt.be4"></button>
+          </div>
+        </div>
+        <div class="game-info" data-speed="-0.05">
+          <div class="game-top mono"><span class="game-n">03 / 05</span><span class="status s-early" data-i18n="lab.be.status">Preproducción técnica</span></div>
+          <h3 class="game-name">Black Evac</h3>
+          <p class="game-genre" data-i18n="lab.be.genre">Extraction shooter cooperativo de zombis</p>
+          <p class="game-pitch" data-i18n="lab.be.pitch">Incursiones tácticas en 3D pixelado con vista cenital: munición escasa, ruido peligroso, una infección que obliga a medicarse hasta extraer y cooperativo de hasta cuatro jugadores.</p>
+          <ul class="game-points">
+            <li data-i18n="lab.be.p1">Pipeline propio de 3D pixelado a 360 líneas con escalado entero.</li>
+            <li data-i18n="lab.be.p2">Una ciudad con unas 127.800 piezas de atrezo, 11.899 estancias y 3,7&nbsp;km de alcantarillado.</li>
+            <li data-i18n="lab.be.p3">Kit urbano, superviviente y zombis generados en Blender con fuentes editables.</li>
+            <li data-i18n="lab.be.p4">Decisiones técnicas documentadas en ADR y planes por fases.</li>
+          </ul>
+          <ul class="tags mono" role="list"><li>Godot 4.7</li><li>C#</li><li>Blender</li><li>xUnit</li></ul>
+        </div>
+      </article>
+
+      <article class="game reveal" id="skybreaker" style="--g1:#ffb547;--g2:#6fc3ff">
+        <div class="game-media" data-speed="0.04">
+          <button type="button" class="game-cover" data-gallery="skybreaker" data-index="0" aria-label="Ampliar capturas de Skybreaker" data-i18n-attr="aria-label:lab.zoomSB">
+            <img src="assets/img/games/skybreaker-1-sm.webp" data-full="assets/img/games/skybreaker-1.webp" width="760" height="428" loading="lazy" decoding="async" alt="Skybreaker: ataque a una base con multiplicador de combo" data-i18n-attr="alt:alt.sb1">
+            <span class="zoom mono" aria-hidden="true">⤢</span>
+          </button>
+          <div class="thumbs">
+            <button type="button" data-gallery="skybreaker" data-index="0" class="on"><img src="assets/img/games/skybreaker-1-sm.webp" data-full="assets/img/games/skybreaker-1.webp" loading="lazy" decoding="async" alt="Skybreaker: ataque a una base con multiplicador de combo" data-i18n-attr="alt:alt.sb1"></button>
+            <button type="button" data-gallery="skybreaker" data-index="1"><img src="assets/img/games/skybreaker-2-sm.webp" data-full="assets/img/games/skybreaker-2.webp" loading="lazy" decoding="async" alt="Skybreaker: menú principal" data-i18n-attr="alt:alt.sb2"></button>
+            <button type="button" data-gallery="skybreaker" data-index="2"><img src="assets/img/games/skybreaker-3-sm.webp" data-full="assets/img/games/skybreaker-3.webp" loading="lazy" decoding="async" alt="Skybreaker: vuelo sobre el mapa procedural" data-i18n-attr="alt:alt.sb3"></button>
+            <button type="button" data-gallery="skybreaker" data-index="3"><img src="assets/img/games/skybreaker-4-sm.webp" data-full="assets/img/games/skybreaker-4.webp" loading="lazy" decoding="async" alt="Skybreaker: hangar del portaaviones con módulos" data-i18n-attr="alt:alt.sb4"></button>
+          </div>
+        </div>
+        <div class="game-info" data-speed="-0.05">
+          <div class="game-top mono"><span class="game-n">04 / 05</span><span class="status s-play" data-i18n="lab.sb.status">Versión 0.2 jugable</span></div>
+          <h3 class="game-name">Skybreaker</h3>
+          <p class="game-genre" data-i18n="lab.sb.genre">Roguelike de ataque aéreo</p>
+          <p class="game-pitch" data-i18n="lab.sb.pitch">Despegas de un portaaviones sobre las nubes, picas hasta un mapa procedural, arrasas las bases enemigas y vuelves a subir. Módulos combinables al estilo Balatro y tu escuadrón como vidas.</p>
+          <ul class="game-points">
+            <li data-i18n="lab.sb.p1">Tres actos de campaña (templado, desierto y ártico) y modo infinito.</li>
+            <li data-i18n="lab.sb.p2">4 aviones, 8 armas, 4 habilidades y 42 módulos combinables.</li>
+            <li data-i18n="lab.sb.p3">Bot de QA y simulador de balance ejecutables desde la línea de comandos.</li>
+          </ul>
+          <ul class="tags mono" role="list"><li>Unity 6</li><li>C#</li><li>URP</li><li>UI Toolkit</li></ul>
+        </div>
+      </article>
+
+      <article class="game reveal" id="one-more-horde" style="--g1:#9cff6b;--g2:#ff5fa2">
+        <div class="game-media" data-speed="0.04">
+          <button type="button" class="game-cover" data-gallery="one-more-horde" data-index="0" aria-label="Ampliar capturas de One More Horde" data-i18n-attr="aria-label:lab.zoomOMH">
+            <img src="assets/img/games/one-more-horde-1-sm.webp" data-full="assets/img/games/one-more-horde-1.webp" width="760" height="428" loading="lazy" decoding="async" alt="One More Horde: una horda de zombis contra las defensas" data-i18n-attr="alt:alt.omh1">
+            <span class="zoom mono" aria-hidden="true">⤢</span>
+          </button>
+          <div class="thumbs">
+            <button type="button" data-gallery="one-more-horde" data-index="0" class="on"><img src="assets/img/games/one-more-horde-1-sm.webp" data-full="assets/img/games/one-more-horde-1.webp" loading="lazy" decoding="async" alt="One More Horde: una horda de zombis contra las defensas" data-i18n-attr="alt:alt.omh1"></button>
+            <button type="button" data-gallery="one-more-horde" data-index="1"><img src="assets/img/games/one-more-horde-2-sm.webp" data-full="assets/img/games/one-more-horde-2.webp" loading="lazy" decoding="async" alt="One More Horde: Tesla, lanzallamas y mortero a la vez" data-i18n-attr="alt:alt.omh2"></button>
+            <button type="button" data-gallery="one-more-horde" data-index="2"><img src="assets/img/games/one-more-horde-3-sm.webp" data-full="assets/img/games/one-more-horde-3.webp" loading="lazy" decoding="async" alt="One More Horde: lanzallamas frente a la horda" data-i18n-attr="alt:alt.omh3"></button>
+            <button type="button" data-gallery="one-more-horde" data-index="3"><img src="assets/img/games/one-more-horde-4-sm.webp" data-full="assets/img/games/one-more-horde-4.webp" loading="lazy" decoding="async" alt="One More Horde: ciudad procedural de noche" data-i18n-attr="alt:alt.omh4"></button>
+          </div>
+        </div>
+        <div class="game-info" data-speed="-0.05">
+          <div class="game-top mono"><span class="game-n">05 / 05</span><span class="status s-early" data-i18n="lab.omh.status">Prototipo</span></div>
+          <h3 class="game-name">One More Horde</h3>
+          <p class="game-genre" data-i18n="lab.omh.genre">Tower defense roguelike de hordas masivas</p>
+          <p class="game-pitch" data-i18n="lab.omh.pitch">Construyes una máquina de destrucción cada vez más absurda: defensas automáticas, dados en tiempo real y reacciones en cadena entre electricidad, fuego, ácido y explosivos.</p>
+          <ul class="game-points">
+            <li data-i18n="lab.omh.p1">Simulación determinista en .NET, separada del motor y testeable sin Unity.</li>
+            <li data-i18n="lab.omh.p2">Pruebas de rendimiento con 20.000 enemigos vivos y visibles en pantalla.</li>
+            <li data-i18n="lab.omh.p3">Ciudades procedurales por semilla y un casino postapocalíptico como base de operaciones.</li>
+          </ul>
+          <ul class="tags mono" role="list"><li>Unity 6</li><li>C#</li><li>.NET</li><li data-i18n="lab.tagProc">Procedural</li></ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÉTODO ============ -->
+<section class="section method" id="metodo" data-chapter="03" data-chapter-key="ch.method" aria-labelledby="method-title">
+  <div class="shell">
+    <header class="section-head reveal">
+      <span class="ghost" aria-hidden="true" data-i18n="nav.method">Método</span>
+      <p class="eyebrow mono"><span>03</span><span data-i18n="method.eyebrow">Método</span></p>
+      <h2 class="section-title" data-speed="0.08" id="method-title" data-i18n="method.title">Trabajar con IA es <em>dirigir, no solo pedir.</em></h2>
+      <p class="section-lead" data-i18n="method.lead">En el trabajo uso Codex y ChatGPT a diario. En mis proyectos voy más allá: combino Claude, Codex y OpenCode con modelos de distintos proveedores (GPT, Claude, Gemini, Kimi, DeepSeek y Grok) y trato a los agentes como a un equipo. Necesitan contexto, reglas claras y una forma objetiva de comprobar su trabajo.</p>
+    </header>
+
+    <div class="mission reveal">
+      <ol class="flow" role="list">
+        <li class="flow-step" data-speed="0.02" data-flow="0"><span class="mono">01</span><h3 data-i18n="method.f1h">Contexto</h3><p data-i18n="method.f1p">Cada repositorio tiene su <code>AGENTS.md</code> y sus skills: cómo trabajar, qué no tocar y cómo validar.</p></li>
+        <li class="flow-step" data-speed="0.05" data-flow="1"><span class="mono">02</span><h3 data-i18n="method.f2h">Plan</h3><p data-i18n="method.f2p">Divido el trabajo en paquetes delegables, cada uno con su definición de terminado.</p></li>
+        <li class="flow-step" data-speed="0.08" data-flow="2"><span class="mono">03</span><h3 data-i18n="method.f3h">En paralelo</h3><p data-i18n="method.f3p">Varios agentes trabajan a la vez, cada uno en su propia rama aislada con <code>git worktree</code>.</p></li>
+        <li class="flow-step" data-speed="0.11" data-flow="3"><span class="mono">04</span><h3 data-i18n="method.f4h">Verificación</h3><p data-i18n="method.f4p">Tests, bots que juegan, simuladores de balance y capturas de regresión visual.</p></li>
+        <li class="flow-step" data-speed="0.14" data-flow="4"><span class="mono">05</span><h3 data-i18n="method.f5h">Integración</h3><p data-i18n="method.f5p">Reviso, integro y decido. La responsabilidad final es mía.</p></li>
+      </ol>
+
+      <div class="console" id="console">
+        <div class="console-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="mono console-title" data-i18n="method.cTitle">sprint.sim — simulación ilustrativa</span>
+          <button type="button" class="btn btn-small" id="run-sprint"><span aria-hidden="true">▶</span> <span data-i18n="method.run">Ejecutar</span></button>
+        </div>
+        <div class="console-body">
+          <svg class="lanes" viewBox="0 0 600 230" aria-hidden="true">
+            <g class="lane-paths">
+              <path id="lp0" d="M70 115 C 150 115, 150 30, 230 30 L 400 30 C 470 30, 470 115, 530 115"/>
+              <path id="lp1" d="M70 115 C 150 115, 150 85, 230 85 L 400 85 C 470 85, 470 115, 530 115"/>
+              <path id="lp2" d="M70 115 C 150 115, 150 145, 230 145 L 400 145 C 470 145, 470 115, 530 115"/>
+              <path id="lp3" d="M70 115 C 150 115, 150 200, 230 200 L 400 200 C 470 200, 470 115, 530 115"/>
+            </g>
+            <g class="lane-labels mono">
+              <text x="236" y="22">agent-a · ui</text>
+              <text x="236" y="77">agent-b · gameplay</text>
+              <text x="236" y="137">agent-c · blender</text>
+              <text x="236" y="192">agent-d · tests</text>
+            </g>
+            <g class="hub hub-in" transform="translate(48 115)"><circle r="22"/><text y="4" text-anchor="middle" class="mono">PLAN</text></g>
+            <g class="hub hub-out" transform="translate(552 115)"><circle r="22"/><text y="4" text-anchor="middle" class="mono">MAIN</text></g>
+            <g class="packets"><circle class="pk" r="5"/><circle class="pk" r="5"/><circle class="pk" r="5"/><circle class="pk" r="5"/></g>
+          </svg>
+          <pre class="log mono" id="sprint-log" aria-live="polite"><span class="muted" data-i18n="method.idle">$ esperando… pulsa «Ejecutar»</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="principles">
+      <article class="principle reveal" data-speed="0.03"><span class="mono p-k">A</span><h3 data-i18n="method.pr1h">El modelo adecuado para cada tarea</h3><p data-i18n="method.pr1p">No todo necesita el modelo más capaz. Comparo GPT, Claude, Gemini, Kimi, DeepSeek o Grok por calidad, velocidad, consumo y coste antes de elegir.</p></article>
+      <article class="principle reveal" data-speed="0.09"><span class="mono p-k">B</span><h3 data-i18n="method.pr2h">Contexto antes que prompts</h3><p data-i18n="method.pr2p">Skills reutilizables y MCP para conectar herramientas y datos. Un buen contexto ahorra más que el mejor prompt.</p></article>
+      <article class="principle reveal" data-speed="0.15"><span class="mono p-k">C</span><h3 data-i18n="method.pr3h">Complejidad solo si compensa</h3><p data-i18n="method.pr3p">Subagentes y flujos multiagente cuando dividir el problema mejora el resultado. Si no, una sola herramienta bien usada.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECORRIDO ============ -->
+<section class="section path" id="recorrido" data-chapter="04" data-chapter-key="ch.path" aria-labelledby="path-title">
+  <div class="shell path-grid">
+    <header class="section-head path-head reveal">
+      <span class="ghost" aria-hidden="true" data-i18n="nav.path">Recorrido</span>
+      <p class="eyebrow mono"><span>04</span><span data-i18n="path.eyebrow">Recorrido</span></p>
+      <h2 class="section-title" id="path-title" data-i18n="path.title">No empecé en tecnología. <em>Llegué por decisión propia.</em></h2>
+      <p class="section-lead" data-i18n="path.lead">Antes de programar estudié Cuidados Auxiliares de Enfermería y trabajé de cara al público, donde acabé formando a nuevos compañeros. DAM fue el cambio de rumbo; NTT DATA llegó mientras aún estudiaba.</p>
+    </header>
+    <ol class="timeline" role="list">
+      <li class="t-item reveal is-now"><span class="t-date mono" data-i18n="path.i1d">Jun 2025 — hoy</span><div><h3>Junior Engineer · NTT DATA</h3><p data-i18n="path.i1p">Jornada completa, híbrido. Liderazgo técnico de una iniciativa de agentes de IA, Python, automatización y coordinación de desarrolladores en prácticas.</p></div></li>
+      <li class="t-item reveal is-now"><span class="t-date mono" data-i18n="path.i2d">2025 — hoy</span><div><h3 data-i18n="path.i2h">Grado en Ingeniería Informática · UOC</h3><p data-i18n="path.i2p">Compaginado con mi actividad profesional.</p></div></li>
+      <li class="t-item reveal"><span class="t-date mono" data-i18n="path.i3d">Jun 2024 — may 2025</span><div><h3>Software Developer · NTT DATA</h3><p data-i18n="path.i3p">Contrato de prácticas en desarrollo de software antes de incorporarme a jornada completa.</p></div></li>
+      <li class="t-item reveal"><span class="t-date mono" data-i18n="path.i4d">Sept 2023 — may 2025</span><div><h3 data-i18n="path.i4h">Técnico Superior en DAM · Institut Poblenou</h3><p data-i18n="path.i4p">Desarrollo de Aplicaciones Multiplataforma. La etapa en la que convertí la programación en mi profesión.</p><span class="award mono" data-i18n="path.award">Matrícula de Honor</span></div></li>
+      <li class="t-item reveal"><span class="t-date mono" data-i18n="path.i5d">Abr 2022 — jun 2024</span><div><h3 data-i18n="path.i5h">McDonald's · Equipo → Formador</h3><p data-i18n="path.i5p">Atención al cliente y trabajo en equipo. Desde noviembre de 2023, formación de nuevo personal y verificación de procedimientos.</p></div></li>
+      <li class="t-item reveal"><span class="t-date mono">2021 — 2023</span><div><h3 data-i18n="path.i6h">Técnico en Cuidados Auxiliares de Enfermería · Institut Castellarnau</h3><p data-i18n="path.i6p">Mi formación anterior al cambio hacia el software.</p></div></li>
+      <li class="t-item reveal"><span class="t-date mono" data-i18n="path.i7d">Jul — sept 2021</span><div><h3 data-i18n="path.i7h">IKEA · Reponedor</h3><p data-i18n="path.i7p">Gestión, localización y reposición de producto en tienda y almacén.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section class="section stack" id="stack" data-chapter="05" data-chapter-key="ch.stack" aria-labelledby="stack-title">
+  <div class="shell">
+    <header class="section-head reveal">
+      <span class="ghost" aria-hidden="true" data-i18n="nav.stack">Stack</span>
+      <p class="eyebrow mono"><span>05</span><span data-i18n="stack.eyebrow">Stack</span></p>
+      <h2 class="section-title" data-speed="0.08" id="stack-title" data-i18n="stack.title">Herramientas que uso, <em>y para qué.</em></h2>
+    </header>
+    <div class="stack-grid">
+      <article class="stack-card reveal" data-speed="0.02" style="--c:#7aa2ff">
+        <span class="mono stack-k" data-i18n="stack.c1k">Día a día</span>
+        <h3 data-i18n="stack.c1h">Trabajo en NTT DATA</h3>
+        <ul class="chips" role="list"><li>Python</li><li>Power Automate</li><li>Jira</li><li>Postman</li><li>SonarQube</li></ul>
+        <p data-i18n="stack.c1p">Desarrollo, automatización de procesos, pruebas de API y calidad de código.</p>
+      </article>
+      <article class="stack-card reveal" data-speed="0.07" style="--c:#b48cff">
+        <span class="mono stack-k" data-i18n="stack.c2k">IA aplicada</span>
+        <h3 data-i18n="stack.c2h">Agentes y modelos</h3>
+        <ul class="chips" role="list"><li data-i18n="stack.agents">Agentes de IA</li><li>Codex</li><li>ChatGPT</li><li>Claude</li><li>OpenCode</li><li>Skills</li><li>MCP</li><li data-i18n="stack.subagents">Subagentes</li></ul>
+        <p class="chips-k mono" data-i18n="stack.models">Modelos</p>
+        <ul class="chips chips-models" role="list"><li>GPT</li><li>Claude</li><li>Gemini</li><li>Kimi</li><li>DeepSeek</li><li>Grok</li></ul>
+        <p data-i18n="stack.c2p">Codex y ChatGPT en el trabajo; Claude, Gemini, Kimi, DeepSeek, Grok y OpenCode en mis proyectos personales.</p>
+      </article>
+      <article class="stack-card reveal" data-speed="0.12" style="--c:#ffb547">
+        <span class="mono stack-k" data-i18n="stack.c3k">Videojuegos</span>
+        <h3 data-i18n="stack.c3h">Motores y 3D</h3>
+        <ul class="chips" role="list"><li>Godot 4</li><li>Unity 6</li><li>C#</li><li>GDScript</li><li>.NET</li><li data-i18n="stack.blender">Blender + Python</li><li>Shaders</li></ul>
+        <p data-i18n="stack.c3p">Gameplay, generación procedural, modelado por script y rendimiento.</p>
+      </article>
+      <article class="stack-card reveal" data-speed="0.17" style="--c:#6ff0ff">
+        <span class="mono stack-k" data-i18n="stack.c4k">Base técnica</span>
+        <h3 data-i18n="stack.c4h">Fundamentos</h3>
+        <ul class="chips" role="list"><li>Java</li><li data-i18n="stack.oop">POO</li><li>SQL</li><li>Git</li><li>.NET · C#</li><li>HTML · CSS</li></ul>
+        <p data-i18n="stack.c4p">Lo que aprendí en DAM y en mis primeros proyectos profesionales.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE MÍ ============ -->
+<section class="section about" id="sobre-mi" data-chapter="06" data-chapter-key="ch.about" aria-labelledby="about-title">
+  <div class="shell about-grid">
+    <figure class="about-photo reveal" data-speed="0.14">
+      <div class="photo-frame"><img src="assets/img/diego.webp" width="400" height="400" loading="lazy" decoding="async" alt="Retrato de Diego Torres García" data-i18n-attr="alt:about.alt"></div>
+      <figcaption class="mono" data-i18n="about.caption">Área de Barcelona · 2026</figcaption>
+    </figure>
+    <div class="about-copy reveal">
+      <p class="eyebrow mono"><span>06</span><span data-i18n="about.eyebrow">Sobre mí</span></p>
+      <h2 class="section-title" id="about-title" data-i18n="about.title">Me gusta entender <em>cómo encajan las piezas.</em></h2>
+      <p class="lead" data-i18n="about.p1">No me basta con que algo funcione: quiero saber por qué está montado así, qué alternativas había y qué decisión compensa más.</p>
+      <p data-i18n="about.p2">Esa curiosidad me ha llevado del desarrollo generalista a Python, la automatización y los agentes de IA. Y fuera del trabajo, a los videojuegos: el proyecto perfecto para aprender de todo a la vez.</p>
+      <p data-i18n="about.p3">Estudio Ingeniería Informática en la UOC mientras trabajo y terminé DAM con Matrícula de Honor. Antes trabajé en IKEA y en McDonald's, donde descubrí que me gusta enseñar. Acompañar a otros sigue siendo parte de mi trabajo.</p>
+      <dl class="facts">
+        <div><dt class="mono" data-i18n="about.f1k">Idiomas</dt><dd data-i18n="about.f1v">Español y catalán nativos · Inglés B2 (FCE) · Francés A2 (DELF)</dd></div>
+        <div><dt class="mono" data-i18n="about.f2k">Formación</dt><dd data-i18n="about.f2v">Ingeniería Informática (UOC, en curso) · DAM, Matrícula de Honor · TCAE</dd></div>
+        <div><dt class="mono" data-i18n="about.f3k">Ubicación</dt><dd data-i18n="about.f3v">Área de Barcelona · trabajo híbrido</dd></div>
+        <div><dt class="mono" data-i18n="about.f4k">Otros</dt><dd data-i18n="about.f4v">Carné de conducir y vehículo propio</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="contact" id="contacto" data-chapter="07" data-chapter-key="ch.contact" aria-labelledby="contact-title">
+  <div class="shell contact-inner reveal">
+    <p class="eyebrow mono"><span>07</span><span data-i18n="contact.eyebrow">Contacto</span></p>
+    <h2 class="contact-title" data-speed="0.18" id="contact-title" data-i18n="contact.title">¿Hablamos?</h2>
+    <p class="contact-lead" data-i18n="contact.lead">Si quieres hablar de agentes de IA, automatización, Python o videojuegos, o simplemente comparar cómo usamos estas herramientas, escríbeme.</p>
+    <div class="mail-card">
+      <a class="mail-link" id="mail-link" href="#contacto"><span class="mono mail-k" data-i18n="contact.email">Email</span><span class="mail-v" id="mail-text">diegotorres2.dd [at] gmail.com</span></a>
+      <button type="button" class="btn btn-small" id="copy-mail"><span data-i18n="contact.copy">Copiar</span></button>
+    </div>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="https://www.linkedin.com/in/diego-torres-ditogar021/" target="_blank" rel="noopener"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
+      <a class="btn" href="assets/cv/CV_Diego_Torres_Garcia_2026.pdf" download><span data-i18n="hero.cv">Descargar CV</span><span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span>© <span id="year">2026</span> Diego Torres García</span>
+    <span class="mono" data-i18n="footer.built">HTML · CSS · JavaScript · Three.js</span>
+    <a href="#inicio" class="mono" data-i18n="footer.top">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<!-- Paleta de comandos -->
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-labelledby="palette-label" hidden>
+  <div class="palette-backdrop" data-close></div>
+  <div class="palette-box">
+    <label class="sr-only" id="palette-label" for="palette-input" data-i18n="pal.label">Navegación rápida</label>
+    <div class="palette-search"><span class="mono" aria-hidden="true">›</span><input id="palette-input" type="text" autocomplete="off" spellcheck="false" placeholder="¿Adónde vamos?" data-i18n-attr="placeholder:pal.placeholder" role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list"></div>
+    <ul class="palette-list" id="palette-list" role="listbox"></ul>
+    <div class="palette-foot mono"><span><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="pal.move">moverse</span></span><span><kbd>↵</kbd> <span data-i18n="pal.go">abrir</span></span><span><kbd>Esc</kbd> <span data-i18n="pal.close">cerrar</span></span></div>
+  </div>
+</div>
+
+<!-- Visor de capturas -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de capturas" data-i18n-attr="aria-label:lb.label" hidden>
+  <div class="lb-backdrop" data-close></div>
+  <figure class="lb-figure">
+    <img id="lb-img" src="data:," alt="">
+    <figcaption class="mono"><span id="lb-cap"></span><span id="lb-count"></span></figcaption>
+  </figure>
+  <button type="button" class="lb-btn lb-prev" id="lb-prev" aria-label="Anterior" data-i18n-attr="aria-label:lb.prev">←</button>
+  <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Siguiente" data-i18n-attr="aria-label:lb.next">→</button>
+  <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Cerrar" data-i18n-attr="aria-label:lb.close">×</button>
+</div>
+
+<div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

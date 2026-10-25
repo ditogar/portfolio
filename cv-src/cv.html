@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CV · Diego Torres García</title>
+<meta name="author" content="Diego Torres García">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@500&display=block">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --ink: #0d1124;
+    --text: #2c3247;
+    --muted: #687089;
+    --faint: #9aa1b5;
+    --line: #e3e6ef;
+    --side: #f4f6fb;
+    --blue: #4a6cf7;
+    --violet: #8b5cf6;
+    --grad: linear-gradient(90deg, #4a6cf7, #8b5cf6 55%, #14b8d4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; height: 297mm; }
+  body { font-family: "Inter Tight", "Segoe UI", Arial, sans-serif; color: var(--text); font-size: 8.7pt; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  ul { list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  .page { width: 210mm; height: 297mm; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+
+  /* Cabecera */
+  header { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 8mm; padding: 9mm 14mm 8mm; background: #070a18; color: #fff; overflow: hidden; }
+  header::before { content: ""; position: absolute; width: 120mm; height: 120mm; right: -30mm; top: -70mm; background: radial-gradient(circle, rgba(90,108,255,.55), transparent 65%); }
+  header::after { content: ""; position: absolute; width: 90mm; height: 90mm; left: 40mm; bottom: -70mm; background: radial-gradient(circle, rgba(139,92,246,.35), transparent 65%); }
+  .head-txt { position: relative; z-index: 1; }
+  .kicker { font: 500 6.6pt "JetBrains Mono", monospace; letter-spacing: .14em; text-transform: uppercase; color: #9fb0e6; }
+  h1 { margin-top: 2mm; font-size: 26pt; line-height: 1; letter-spacing: -.012em; font-weight: 700; }
+  .role { margin-top: 2.6mm; font-size: 11.5pt; font-weight: 500; color: #e6eaff; }
+  .role em { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: 13pt; color: #c3b4ff; word-spacing: .12em; }
+  .photo { position: relative; z-index: 1; width: 26mm; height: 26mm; border-radius: 50%; padding: .7mm; background: linear-gradient(140deg, #a9bbff, #8b5cf6 50%, #7fe9ff); flex-shrink: 0; }
+  .photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+
+  /* Cuerpo */
+  .body { display: grid; grid-template-columns: 1fr 64mm; min-height: 0; }
+  main { padding: 6mm 8mm 3mm 14mm; }
+  aside { background: var(--side); padding: 6mm 9mm 3mm 8mm; border-left: 1px solid var(--line); }
+  h2 { display: flex; align-items: center; gap: 2.5mm; font: 600 7pt "JetBrains Mono", monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin-bottom: 2.6mm; }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  section + section { margin-top: 4mm; }
+  aside section + section { margin-top: 3.4mm; }
+
+  .summary { font-size: 9.1pt; color: var(--ink); line-height: 1.48; }
+  .summary strong { font-weight: 600; }
+
+  .job + .job { margin-top: 2.8mm; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .job-title { font-size: 10pt; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
+  .job-title span { color: var(--blue); font-weight: 600; }
+  .date { flex-shrink: 0; font: 500 6.8pt "JetBrains Mono", monospace; letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
+  .meta { font-size: 7.8pt; color: var(--muted); margin-top: .3mm; }
+  .bullets { margin-top: 1.4mm; }
+  .bullets li { padding-left: 3.4mm; text-indent: -3.4mm; margin-top: .7mm; }
+  .bullets li::before { content: ""; display: inline-block; width: 1.4mm; height: 1.4mm; margin-right: 2mm; border-radius: 50%; background: var(--violet); vertical-align: .35mm; }
+  .bullets strong { color: var(--ink); font-weight: 600; }
+
+  .lab-intro { color: var(--text); }
+  code { font: 500 7pt "JetBrains Mono", monospace; color: var(--ink); background: #eef1f8; border-radius: .8mm; padding: 0 .8mm; }
+  .games { margin-top: 1.6mm; display: grid; grid-template-columns: 1fr 1fr; gap: 1.8mm; }
+  .game { border: 1px solid var(--line); border-radius: 2.2mm; padding: 2mm 2.4mm; }
+  .game b { display: block; font-size: 8.8pt; color: var(--ink); font-weight: 600; }
+  .game i { display: block; font-style: normal; font: 500 6pt "JetBrains Mono", monospace; letter-spacing: .03em; color: var(--muted); text-transform: uppercase; margin-top: .3mm; }
+  .game p { margin-top: .8mm; font-size: 7.7pt; line-height: 1.38; }
+  .game.wide { grid-column: 1 / -1; }
+
+  .edu li + li { margin-top: 1.6mm; }
+  .edu-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .edu b { font-size: 9.2pt; color: var(--ink); font-weight: 600; }
+  .edu .meta { margin-top: 0; }
+  .award { display: inline-block; margin-left: 1.5mm; padding: .2mm 1.8mm; border-radius: 9mm; font: 600 6pt "JetBrains Mono", monospace; letter-spacing: .06em; text-transform: uppercase; color: #3b2a00; background: linear-gradient(90deg, #ffe39b, #ffc46b); vertical-align: 1px; }
+
+  .prev { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .prev b { display: block; font-size: 9pt; color: var(--ink); font-weight: 600; }
+  .prev p { margin-top: .6mm; font-size: 7.8pt; }
+
+  /* Lateral */
+  .contact li { margin-top: 1.2mm; font-size: 8.1pt; color: var(--ink); line-height: 1.3; }
+  .contact li:first-child { margin-top: 0; }
+  .contact .k { display: block; font: 500 6pt "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  .group + .group { margin-top: 1.9mm; }
+  .group-k { font-size: 7.6pt; font-weight: 600; color: var(--ink); }
+  .chips { display: flex; flex-wrap: wrap; gap: .9mm; margin-top: 1mm; }
+  .chips li { font-size: 7.1pt; padding: .3mm 1.8mm; border-radius: 9mm; background: #fff; border: 1px solid var(--line); color: var(--text); }
+  .chips li.hl { background: #eaeeff; border-color: #d4dcff; color: #2c3fa8; }
+  .langs li { display: flex; justify-content: space-between; margin-top: 1.3mm; font-size: 8.4pt; }
+  .langs li:first-child { margin-top: 0; }
+  .langs b { color: var(--ink); font-weight: 600; }
+  .langs span { color: var(--muted); font-size: 7.8pt; }
+  .focus { background: #fff; border: 1px solid var(--line); border-left: 2px solid var(--violet); border-radius: 2mm; padding: 2.4mm 2.8mm; font-size: 7.9pt; line-height: 1.45; }
+  .focus b { display: block; font: 600 6.3pt "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--violet); margin-bottom: .8mm; }
+  .others li { font-size: 8.2pt; margin-top: 1mm; }
+
+  footer { display: flex; justify-content: space-between; padding: 3mm 14mm 4.5mm; border-top: 1px solid var(--line); font: 500 6.3pt "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="head-txt">
+      <p class="kicker">Junior Engineer · NTT DATA · Área de Barcelona</p>
+      <h1>Diego Torres García</h1>
+      <p class="role">Construyo software con <em>agentes de IA</em> · Python · Automatización</p>
+    </div>
+    <div class="photo"><img src="../assets/img/diego.jpg" alt="Diego Torres García"></div>
+  </header>
+
+  <div class="body">
+    <main>
+      <section>
+        <h2>Perfil</h2>
+        <p class="summary">Junior Engineer en <strong>NTT DATA</strong>. Lidero técnicamente una nueva iniciativa basada en <strong>agentes de IA</strong>: diseño la solución, tomo las decisiones técnicas y participo en su desarrollo con <strong>Python</strong> y automatización. Coordino a desarrolladores en prácticas. Fuera del trabajo construyo videojuegos dirigiendo equipos de agentes de IA, mi banco de pruebas para trabajar con estas herramientas de forma rigurosa.</p>
+      </section>
+
+      <section>
+        <h2>Experiencia</h2>
+        <article class="job">
+          <div class="job-head"><p class="job-title">Junior Engineer <span>· NTT DATA</span></p><p class="date">Jun 2025 – actualidad</p></div>
+          <p class="meta">Barcelona · Híbrido · Jornada completa</p>
+          <ul class="bullets">
+            <li><strong>Liderazgo técnico</strong> de una nueva iniciativa basada en agentes de IA: diseño de la solución, decisiones técnicas y desarrollo.</li>
+            <li>Desarrollo de soluciones y <strong>automatizaciones con Python y Power Automate</strong>, con un foco creciente en IA aplicada.</li>
+            <li><strong>Coordinación de desarrolladores en prácticas</strong>: planificación y reparto de tareas, seguimiento de avances y tiempos. Apoyo a 4-5 personas y responsable directo de 2, incluido su TFG.</li>
+            <li>Uso diario de Codex y ChatGPT; Jira, Postman y SonarQube para seguimiento, pruebas de API y calidad.</li>
+          </ul>
+        </article>
+        <article class="job">
+          <div class="job-head"><p class="job-title">Software Developer <span>· NTT DATA</span></p><p class="date">Jun 2024 – May 2025</p></div>
+          <p class="meta">Contrato de prácticas</p>
+          <ul class="bullets">
+            <li>Etapa de prácticas en desarrollo de software antes de incorporarme a jornada completa como Junior Engineer.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Proyectos personales · Videojuegos con IA</h2>
+        <p class="lab-intro">Coordino varios agentes de IA en paralelo (Claude, Codex, OpenCode; modelos GPT, Claude, Gemini, Kimi, DeepSeek y Grok): <code>AGENTS.md</code> y skills por repositorio, paquetes de trabajo en ramas aisladas (<code>git worktree</code>) y verificación con tests, bots de QA y simuladores de balance. Todos en desarrollo; objetivo: Steam.</p>
+        <ul class="bullets">
+          <li><strong>Deep Quota</strong> (Godot 4.7 · GDScript · Blender): roguelite completo y jugable, con tableros resolubles verificados, audio 100&nbsp;% sintetizado y escenarios modelados por script.</li>
+          <li><strong>One More Horde</strong> (Unity 6 · C# · .NET): tower defense roguelike con simulación determinista separada del motor; pruebas con 20.000 enemigos en pantalla.</li>
+          <li><strong>Skybreaker</strong> (Unity 6, v0.2 jugable), <strong>Black Evac</strong> (Godot + C#, preproducción) y <strong>Dados del Pozo</strong> (Godot, incremental de dados con física 3D).</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Formación</h2>
+        <ul class="edu">
+          <li><div class="edu-head"><b>Grado en Ingeniería Informática</b><span class="date">2025 – actualidad</span></div><p class="meta">Universitat Oberta de Catalunya (UOC) · compaginado con el trabajo</p></li>
+          <li><div class="edu-head"><b>Técnico Superior en DAM <span class="award">Matrícula de Honor</span></b><span class="date">2023 – 2025</span></div><p class="meta">Desarrollo de Aplicaciones Multiplataforma · Institut Poblenou</p></li>
+          <li><div class="edu-head"><b>Técnico en Cuidados Auxiliares de Enfermería</b><span class="date">2021 – 2023</span></div><p class="meta">Institut Castellarnau</p></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Experiencia anterior</h2>
+        <div class="prev">
+          <div><b>McDonald's · Equipo → Formador</b><p class="date">Abr 2022 – Jun 2024</p><p>Atención al cliente; desde nov. 2023, formación de nuevo personal y verificación de procedimientos.</p></div>
+          <div><b>IKEA · Reponedor</b><p class="date">Jul – Sept 2021</p><p>Gestión, localización y reposición de producto en tienda y almacén.</p></div>
+        </div>
+      </section>
+    </main>
+
+    <aside>
+      <section>
+        <h2>Contacto</h2>
+        <ul class="contact">
+          <li><span class="k">Tel</span><a href="tel:+34608475928">608 47 59 28</a></li>
+          <li><span class="k">Email</span><a href="mailto:diegotorres2.dd@gmail.com">diegotorres2.dd@gmail.com</a></li>
+          <li><span class="k">In</span><a href="https://www.linkedin.com/in/diego-torres-ditogar021/">linkedin.com/in/<br>diego-torres-ditogar021</a></li>
+          <li><span class="k">Base</span><span>Área de Barcelona · híbrido</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Tecnologías</h2>
+        <div class="group"><p class="group-k">Día a día</p><ul class="chips"><li class="hl">Python</li><li>Power Automate</li><li>Jira</li><li>Postman</li><li>SonarQube</li></ul></div>
+        <div class="group"><p class="group-k">IA aplicada</p><ul class="chips"><li class="hl">Agentes de IA</li><li>Codex</li><li>ChatGPT</li><li>Claude</li><li>OpenCode</li><li>Skills</li><li>MCP</li><li>Subagentes</li></ul></div>
+        <div class="group"><p class="group-k">Modelos de IA</p><ul class="chips"><li class="hl">GPT</li><li class="hl">Claude</li><li class="hl">Gemini</li><li class="hl">Kimi</li><li class="hl">DeepSeek</li><li class="hl">Grok</li></ul></div>
+        <div class="group"><p class="group-k">Videojuegos</p><ul class="chips"><li>Godot</li><li>Unity</li><li>C#</li><li>GDScript</li><li>.NET</li><li>Blender + Python</li></ul></div>
+        <div class="group"><p class="group-k">Base técnica</p><ul class="chips"><li>Java</li><li>POO</li><li>SQL</li><li>Git</li><li>HTML</li><li>CSS</li></ul></div>
+      </section>
+
+      <section>
+        <h2>Cómo uso la IA</h2>
+        <p class="focus"><b>Foco actual</b>Elegir el modelo adecuado para cada tarea comparando calidad, velocidad, consumo y coste. Contexto con skills y MCP; subagentes solo cuando mejoran el resultado.</p>
+      </section>
+
+      <section>
+        <h2>Idiomas</h2>
+        <ul class="langs">
+          <li><b>Español</b><span>Nativo</span></li>
+          <li><b>Catalán</b><span>Nativo</span></li>
+          <li><b>Inglés</b><span>B2 · FCE</span></li>
+          <li><b>Francés</b><span>A2 · DELF</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Otros</h2>
+        <ul class="others"><li>Carné de conducir y vehículo propio</li></ul>
+      </section>
+    </aside>
+  </div>
+
+  <footer><span>CV actualizado · octubre 2026</span><span>Diego Torres García</span></footer>
+</div>
+</body>
+</html>
