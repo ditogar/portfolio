@@ -34,7 +34,7 @@ Idioma inicial: `?lang=es|en|ca` → preferencia guardada → idioma del navegad
 
 1. Crear repositorio y subir el contenido de esta carpeta (`.claude/` está en `.gitignore`).
 2. Settings → Pages → Deploy from a branch → `main` / `root`.
-3. Con la URL definitiva, cambiar `og:image` en `index.html` a URL absoluta (p. ej. `https://usuario.github.io/assets/img/og.png`) para que LinkedIn y WhatsApp muestren la vista previa.
+3. Publicado en https://ditogar.github.io/portfolio/ (`og:image`, `og:url` y `canonical` ya apuntan ahí; cámbialos si cambia la URL).
 
 ## CV
 
